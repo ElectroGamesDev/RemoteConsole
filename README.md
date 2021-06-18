@@ -2,7 +2,7 @@
  - RemoteConsole adds /console to your server. 
  - This command allows you to run commands through console.
  - This plugin also allows non-ops to run commands through console (they will need the password).
- - Configurable Password
+ - The password is configurable.
 # Commands
 - /console
 # Permissions
