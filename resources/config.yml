@@ -1,0 +1,2 @@
+# This password is needed to send messages through console using the command /console if the player does not have the permission "remoteconsole.password.bypass" 
+password: "ChangeMe"
