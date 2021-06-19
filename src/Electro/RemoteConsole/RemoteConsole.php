@@ -5,8 +5,6 @@ namespace Electro\RemoteConsole;
 use jojoe77777\FormAPI\SimpleForm;
 use jojoe77777\FormAPI\CustomForm;
 
-use pocketmine\block\Block;
-use pocketmine\Server;
 use pocketmine\Player;
 
 use pocketmine\plugin\PluginBase;
@@ -16,9 +14,6 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\ConsoleCommandSender;
 
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerJoinEvent;
-
-use pocketmine\utils\Config;
 
 class RemoteConsole extends PluginBase implements Listener{
 
