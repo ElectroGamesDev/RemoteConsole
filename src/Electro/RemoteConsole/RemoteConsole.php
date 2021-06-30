@@ -2,7 +2,6 @@
 
 namespace Electro\RemoteConsole;
 
-use jojoe77777\FormAPI\SimpleForm;
 use jojoe77777\FormAPI\CustomForm;
 
 use pocketmine\Player;
