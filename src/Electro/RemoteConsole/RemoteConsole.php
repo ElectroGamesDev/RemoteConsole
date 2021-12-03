@@ -2,24 +2,19 @@
 
 namespace Electro\RemoteConsole;
 
-use jojoe77777\FormAPI\CustomForm;
-
-use pocketmine\Player;
-
+use dktapps\pmforms\CustomForm;
+use dktapps\pmforms\element\Input;
+use dktapps\pmforms\CustomFormResponse;
 use pocketmine\plugin\PluginBase;
-
+use pocketmine\player\Player;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\ConsoleCommandSender;
-
+use pocketmine\console\ConsoleCommandSender;
 use pocketmine\event\Listener;
 
 class RemoteConsole extends PluginBase implements Listener{
 
-    private static $instance;
-    public $player;
-
-    public function onEnable()
+    public function onEnable() : void
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->saveDefaultConfig();
@@ -43,7 +38,7 @@ class RemoteConsole extends PluginBase implements Listener{
                             return true;
                         }
                     }
-                    $this->consoleForm($sender);
+                    $sender->sendForm($this->consoleForm());
                 }
                 else{
                     $sender->sendMessage("§cYou must be in-game to use this command!");
@@ -52,23 +47,16 @@ class RemoteConsole extends PluginBase implements Listener{
         return true;
     }
 
-    public function consoleForm($player)
-    {
-        $form = new CustomForm(function (Player $player, $data) {
-//        $api = Server::getInstance()->getPluginManager()->getPlugin("FormAPI");
-//        $form = $api->createCustomForm(function (Player $player, array $data = null) {
-            $result = $data;
-            if ($result === null) {
-                return true;
-            }
-            $this->getServer()->dispatchCommand(new ConsoleCommandSender(), $data[0]);
-            $player->sendMessage("§aCommand has been executed as console!");
-        });
-
-        $form->setTitle("§lRemote Console");
-        $form->addInput('§r§lEnter Command (Do not use "/")', 'op Player123');
-        $form->sendtoPlayer($player);
-        return $form;
+    private function consoleForm() : CustomForm{
+        return new CustomForm(
+            "§lRemote Console",
+            [
+                new Input("command", '§rEnter Command (Do not use "/")', "op Steve"),
+            ],
+            function(Player $submitter, CustomFormResponse $response) : void{
+                $this->getServer()->dispatchCommand(new ConsoleCommandSender($this->getServer(), $this->getServer()->getLanguage()), $response);
+                $submitter->sendMessage("§aCommand has been executed as console!");
+            },
+        );
     }
-
 }
