@@ -54,8 +54,15 @@ class RemoteConsole extends PluginBase implements Listener{
                 new Input("command", '§rEnter Command (Do not use "/")', "op Steve"),
             ],
             function(Player $submitter, CustomFormResponse $response) : void{
-                $this->getServer()->dispatchCommand(new ConsoleCommandSender($this->getServer(), $this->getServer()->getLanguage()), $response);
-                $submitter->sendMessage("§aCommand has been executed as console!");
+                if ($response->getString("command") != null)
+                {
+                    $this->getServer()->dispatchCommand(new ConsoleCommandSender($this->getServer(), $this->getServer()->getLanguage()), $response->getString("command"));
+                    $submitter->sendMessage("§aCommand has been executed as console!");
+                }
+                else
+                {
+                    $submitter->sendMessage("§cYou have entered an invalid command");
+                }
             },
         );
     }
