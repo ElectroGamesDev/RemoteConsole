@@ -12,3 +12,4 @@ commands:
 permissions:
   remoteconsole.password.bypass:
     default: op
+    
