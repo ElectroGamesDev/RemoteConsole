@@ -3,12 +3,11 @@ name: RemoteConsole
 version: 1.0.0
 api: 4.0.0
 Author: Electro
-
+    
 commands:
   console:
     description: Send commands through console
-    
+
 permissions:
   remoteconsole.password.bypass:
     default: op
-    
