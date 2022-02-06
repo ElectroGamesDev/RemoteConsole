@@ -7,8 +7,11 @@ Author: Electro
 commands:
   console:
     description: Send commands through console
+    permission: remoteconsole.cmd
     
 permissions:
   remoteconsole.password.bypass:
+    default: op
+  remoteconsole.cmd:
     default: op
     
